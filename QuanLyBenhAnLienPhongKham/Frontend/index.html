@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Quản lý Bệnh án Liên Phòng khám</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/print.css">
+    <style>
+        /* Login Page Styles */
+        #loginPage {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #loginPage::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: none;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .login-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .login-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: #718096;
+            font-size: 0.95rem;
+        }
+
+        .form-floating {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-floating > .form-control {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1rem 1rem;
+            height: 58px;
+            transition: all 0.3s;
+        }
+
+        .form-floating > .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-floating > label {
+            padding: 1rem 1rem;
+            color: #718096;
+        }
+
+        .input-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            z-index: 4;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .quick-login {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .quick-login-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .role-btn {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .role-btn:hover {
+            border-color: #667eea;
+            background: #f7fafc;
+            transform: translateX(5px);
+        }
+
+        .role-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .role-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .role-name {
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .role-username {
+            font-size: 0.75rem;
+            color: #718096;
+        }
+
+        .backend-status {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-checking {
+            background: rgba(255, 243, 205, 0.9);
+            color: #856404;
+        }
+
+        .status-online {
+            background: rgba(212, 237, 218, 0.9);
+            color: #155724;
+        }
+
+        .status-offline {
+            background: rgba(248, 215, 218, 0.9);
+            color: #721c24;
+        }
+
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+            border-width: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- Backend Status -->
+        <div id="backendStatus" class="backend-status status-checking">
+            <div class="spinner-border spinner-border-sm" role="status"></div>
+            <span>Đang kiểm tra kết nối...</span>
+        </div>
+
+        <!-- Trang đăng nhập -->
+        <div id="loginPage">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-11 col-lg-9 col-xl-7">
+                        <div class="card login-card">
+                            <div class="card-body p-4 p-md-5">
+                                <div class="row">
+                                    <!-- Form đăng nhập -->
+                                    <div class="col-md-6">
+                                        <div class="login-header">
+                                            <div class="login-icon">
+                                                <i class="bi bi-hospital"></i>
+                                            </div>
+                                            <h1 class="login-title">Đăng nhập</h1>
+                                            <p class="login-subtitle">Hệ thống Quản lý Bệnh án<br>Liên Phòng khám Tư nhân</p>
+                                        </div>
+
+                                        <form id="loginForm">
+                                            <div class="form-floating position-relative">
+                                                <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập" required autocomplete="username">
+                                                <label for="username">Tên đăng nhập</label>
+                                                <i class="bi bi-person input-icon"></i>
+                                            </div>
+
+                                            <div class="form-floating position-relative">
+                                                <input type="password" class="form-control" id="password" placeholder="Mật khẩu" required autocomplete="current-password">
+                                                <label for="password">Mật khẩu</label>
+                                                <i class="bi bi-lock input-icon"></i>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-login w-100" id="loginBtn">
+                                                <i class="bi bi-box-arrow-in-right me-2"></i>
+                                                Đăng nhập
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                    <!-- Quick login -->
+                                    <div class="col-md-6">
+                                        <div class="quick-login">
+                                            <div class="quick-login-title">
+                                                <i class="bi bi-lightning-charge-fill"></i> Đăng nhập nhanh
+                                            </div>
+
+                                            <div class="role-btn" onclick="quickLogin('admin', '123456')">
+                                                <div class="role-icon" style="background: linear-gradient(135deg, #dc3545, #c82333); color: white;">
+                                                    <i class="bi bi-shield-fill-check"></i>
+                                                </div>
+                                                <div class="role-info">
+                                                    <div class="role-name">Quản trị viên</div>
+                                                    <div class="role-username">admin / 123456</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="role-btn" onclick="quickLogin('letan', '123456')">
+                                                <div class="role-icon" style="background: linear-gradient(135deg, #28a745, #218838); color: white;">
+                                                    <i class="bi bi-person-badge"></i>
+                                                </div>
+                                                <div class="role-info">
+                                                    <div class="role-name">Lễ tân</div>
+                                                    <div class="role-username">letan / 123456</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="role-btn" onclick="quickLogin('bacsi', '123456')">
+                                                <div class="role-icon" style="background: linear-gradient(135deg, #007bff, #0056b3); color: white;">
+                                                    <i class="bi bi-heart-pulse"></i>
+                                                </div>
+                                                <div class="role-info">
+                                                    <div class="role-name">Bác sĩ</div>
+                                                    <div class="role-username">bacsi / 123456</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="role-btn" onclick="quickLogin('kythuatvien', '123456')">
+                                                <div class="role-icon" style="background: linear-gradient(135deg, #17a2b8, #117a8b); color: white;">
+                                                    <i class="bi bi-clipboard2-pulse"></i>
+                                                </div>
+                                                <div class="role-info">
+                                                    <div class="role-name">Kỹ thuật viên</div>
+                                                    <div class="role-username">kythuatvien / 123456</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="role-btn" onclick="quickLogin('benhnhan', '123456')">
+                                                <div class="role-icon" style="background: linear-gradient(135deg, #6c757d, #545b62); color: white;">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                                <div class="role-info">
+                                                    <div class="role-name">Bệnh nhân (BN001)</div>
+                                                    <div class="role-username">benhnhan / 123456</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="role-btn" onclick="quickLogin('benhnhan9', '123456')">
+                                                <div class="role-icon" style="background: linear-gradient(135deg, #6c757d, #545b62); color: white;">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                                <div class="role-info">
+                                                    <div class="role-name">Bệnh nhân (BN009)</div>
+                                                    <div class="role-username">benhnhan9 / 123456</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trang chính sau khi đăng nhập -->
+        <div id="mainPage" class="d-none">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <i class="bi bi-hospital"></i> Quản lý Bệnh án
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="bi bi-person-circle"></i> <span id="userDisplayName"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="#" id="logoutBtn">
+                                        <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                                    </a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Sidebar -->
+                    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                        <div class="position-sticky pt-3">
+                            <ul class="nav flex-column" id="sidebarMenu">
+                                <!-- Menu sẽ được load động theo vai trò -->
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <!-- Main content -->
+                    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2" id="pageTitle">Dashboard</h1>
+                        </div>
+                        <div id="mainContent">
+                            <!-- Nội dung chính sẽ được load ở đây -->
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="toast" class="toast" role="alert">
+            <div class="toast-header">
+                <strong class="me-auto">Thông báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastMessage"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/config.js?v=11"></script>
+    <script src="js/auth.js?v=27"></script>
+    <script src="js/api.js?v=27"></script>
+    <script src="js/print-phieu-kham.js?v=6"></script>
+    <script src="js/print-hoa-don.js?v=1"></script>
+    <script src="pages/dashboard.js?v=28"></script>
+    <script src="pages/phong-kham.js?v=27"></script>
+    <script src="pages/benh-nhan.js?v=27"></script>
+    <script src="pages/benh-nhan-cho-kham.js?v=35"></script>
+    <script src="pages/benh-nhan-lich-su.js?v=35"></script>
+    <script src="pages/benh-nhan-ho-so.js?v=33"></script>
+    <script src="pages/le-tan-tao-dot-kham.js?v=31"></script>
+    <script src="pages/le-tan-tra-cuu.js?v=31"></script>
+    <script src="pages/tra-cuu-ho-so.js?v=27"></script>
+    <script src="pages/kham-benh.js?v=27"></script>
+    <script src="pages/nhan-vien.js?v=28"></script>
+    <script src="pages/tai-khoan.js?v=27"></script>
+    <script src="pages/danh-muc-thuoc.js?v=27"></script>
+    <script src="pages/danh-muc-benh.js?v=27"></script>
+    <script src="pages/chuyen-khoa.js?v=27"></script>
+    <script src="pages/phan-quyen.js?v=27"></script>
+    <script src="pages/ky-thuat-vien-chi-dinh.js?v=27"></script>
+    <script src="pages/ky-thuat-vien-ket-qua.js?v=27"></script>
+    <script src="pages/le-tan-tiep-nhan.js?v=29"></script>
+    <script src="pages/le-tan-thanh-toan.js?v=1"></script>
+    <script src="pages/le-tan-dat-kham.js?v=1"></script>
+    <script src="pages/benh-nhan-dat-kham.js?v=1"></script>
+    <script src="pages/yeu-cau-truy-cap.js?v=1"></script>
+    <script src="pages/bao-cao-doanh-thu.js?v=2"></script>
+    <script src="js/app.js?v=28"></script>
+    
+    <script>
+        // Quick login function
+        function quickLogin(username, password) {
+            document.getElementById('username').value = username;
+            document.getElementById('password').value = password;
+            document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        }
+
+        // Check backend status on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            const statusDiv = document.getElementById('backendStatus');
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/test-db');
+                const data = await response.json();
+                
+                if (data.success) {
+                    statusDiv.className = 'backend-status status-online';
+                    statusDiv.innerHTML = `
+                        <i class="bi bi-check-circle-fill"></i>
+                        <span>Backend đang hoạt động</span>
+                    `;
+                    
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        statusDiv.style.opacity = '0';
+                        statusDiv.style.transition = 'opacity 0.5s';
+                        setTimeout(() => statusDiv.style.display = 'none', 500);
+                    }, 3000);
+                } else {
+                    throw new Error('Backend không phản hồi đúng');
+                }
+            } catch (error) {
+                statusDiv.className = 'backend-status status-offline';
+                statusDiv.innerHTML = `
+                    <i class="bi bi-x-circle-fill"></i>
+                    <span>Backend không hoạt động</span>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

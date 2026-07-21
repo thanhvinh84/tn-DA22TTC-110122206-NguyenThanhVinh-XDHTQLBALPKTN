@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+Frontend/node_modules/
+
+# Build outputs
+Backend/bin/
+Backend/obj/
+*.dll
+*.exe
+*.pdb
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+.vscode/
+
+# Logs
+*.log
+
+# Database
+*.mdf
+*.ldf
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Environment files (chứa thông tin nhạy cảm)
+appsettings.Development.json
+appsettings.Local.json
+
+# Package files
+*.nupkg
+*.snupkg
+
+# Test results
+TestResults/
+
+# Media files (nếu không cần thiết)
+*.mp4
+*.avi
+*.mov
+
+# Other
+.idea/

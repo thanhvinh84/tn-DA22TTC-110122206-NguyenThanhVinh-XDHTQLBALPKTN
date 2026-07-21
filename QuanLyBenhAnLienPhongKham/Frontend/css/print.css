@@ -1,0 +1,444 @@
+/* CSS cho in phiếu khám */
+@media print {
+    /* Ẩn các phần không cần in */
+    body * {
+        visibility: hidden;
+    }
+    
+    #printArea, #printArea * {
+        visibility: visible;
+    }
+    
+    #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    
+    /* Ẩn nút in khi in */
+    .no-print {
+        display: none !important;
+    }
+    
+    /* Định dạng trang in */
+    @page {
+        size: A4;
+        margin: 1cm;
+    }
+}
+
+/* Style cho phiếu khám */
+.phieu-kham {
+    max-width: 21cm;
+    margin: 0 auto;
+    padding: 1.5cm;
+    background: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13pt;
+    line-height: 1.6;
+}
+
+.phieu-kham-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5cm;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.5cm;
+}
+
+.phieu-kham-logo {
+    flex: 1;
+}
+
+.phieu-kham-logo h3 {
+    margin: 0;
+    font-size: 14pt;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.phieu-kham-logo p {
+    margin: 0.2cm 0;
+    font-size: 11pt;
+}
+
+.phieu-kham-title {
+    flex: 2;
+    text-align: center;
+}
+
+.phieu-kham-title h1 {
+    margin: 0;
+    font-size: 20pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #0066cc;
+}
+
+.phieu-kham-title p {
+    margin: 0.3cm 0 0 0;
+    font-size: 12pt;
+    font-style: italic;
+}
+
+.phieu-kham-info {
+    margin-bottom: 1cm;
+}
+
+.phieu-kham-info table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.phieu-kham-info td {
+    padding: 0.2cm 0;
+    vertical-align: top;
+}
+
+.phieu-kham-info td:first-child {
+    width: 30%;
+    font-weight: bold;
+}
+
+.phieu-kham-section {
+    margin-bottom: 0.8cm;
+}
+
+.phieu-kham-section h3 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 0 0 0.3cm 0;
+    padding-bottom: 0.2cm;
+    border-bottom: 1px solid #666;
+    color: #0066cc;
+}
+
+.phieu-kham-section p {
+    margin: 0.2cm 0;
+}
+
+.phieu-kham-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.3cm 0;
+}
+
+.phieu-kham-table th,
+.phieu-kham-table td {
+    border: 1px solid #333;
+    padding: 0.2cm;
+    text-align: left;
+}
+
+.phieu-kham-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.phieu-kham-table td:first-child {
+    text-align: center;
+    width: 3cm;
+}
+
+.phieu-kham-footer {
+    margin-top: 1.5cm;
+    display: flex;
+    justify-content: space-between;
+}
+
+.phieu-kham-signature {
+    text-align: center;
+    width: 45%;
+}
+
+.phieu-kham-signature p {
+    margin: 0.2cm 0;
+    font-style: italic;
+}
+
+.phieu-kham-signature .signature-name {
+    margin-top: 2cm;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.phieu-kham-note {
+    margin-top: 1cm;
+    padding: 0.3cm;
+    background-color: #f9f9f9;
+    border-left: 3px solid #0066cc;
+    font-size: 11pt;
+    font-style: italic;
+}
+
+/* Style cho nút in */
+.print-buttons {
+    text-align: center;
+    margin: 1cm 0;
+    padding: 0.5cm;
+    background: #f5f5f5;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1cm;
+}
+
+.print-buttons button {
+    padding: 0.4cm 1.5cm;
+    font-size: 12pt;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3cm;
+}
+
+.print-buttons .btn-print {
+    background: #0066cc;
+    color: white;
+}
+
+.print-buttons .btn-print:hover {
+    background: #0052a3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+}
+
+.print-buttons .btn-close {
+    background: #6c757d;
+    color: white;
+}
+
+.print-buttons .btn-close:hover {
+    background: #545b62;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+
+/* ==================== HÓA ĐƠN STYLES ==================== */
+.hoa-don {
+    background: white;
+    padding: 30px;
+    max-width: 210mm;
+    margin: 0 auto;
+    font-family: 'Times New Roman', Times, serif;
+    color: #333;
+}
+
+.hoa-don-header {
+    border-bottom: 3px double #333;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.hoa-don-logo h3 {
+    color: #0066cc;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.hoa-don-logo p {
+    margin: 3px 0;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.hoa-don-qr {
+    text-align: right;
+}
+
+.hoa-don-title {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.hoa-don-title h1 {
+    color: #d32f2f;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0;
+    letter-spacing: 1px;
+}
+
+.hoa-don-title p {
+    font-size: 14px;
+    font-style: italic;
+}
+
+.hoa-don-info {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.info-table {
+    width: 100%;
+    font-size: 13px;
+}
+
+.info-table td {
+    padding: 5px 0;
+    line-height: 1.6;
+}
+
+.hoa-don-section {
+    margin-bottom: 20px;
+}
+
+.hoa-don-section h3 {
+    color: #0066cc;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 2px solid #0066cc;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.hoa-don-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.hoa-don-table thead {
+    background: #0066cc;
+    color: white;
+}
+
+.hoa-don-table th {
+    padding: 12px 8px;
+    text-align: left;
+    font-weight: bold;
+    border: 1px solid #0066cc;
+}
+
+.hoa-don-table td {
+    padding: 10px 8px;
+    border: 1px solid #ddd;
+    line-height: 1.5;
+}
+
+.hoa-don-table tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.hoa-don-table tbody tr:hover {
+    background: #e3f2fd;
+}
+
+.hoa-don-total {
+    margin: 30px 0;
+}
+
+.tien-bang-chu {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ffc107;
+    font-size: 14px;
+}
+
+.tien-bang-chu em {
+    font-size: 15px;
+    color: #856404;
+    font-weight: 500;
+}
+
+.total-table {
+    width: 100%;
+    font-size: 14px;
+}
+
+.total-table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.total-table .discount-row {
+    color: #28a745;
+}
+
+.total-table .grand-total {
+    background: #0066cc;
+    color: white;
+}
+
+.total-table .grand-total td {
+    padding: 12px 10px;
+    font-size: 18px;
+    border: none;
+}
+
+.hoa-don-status {
+    margin: 20px 0;
+}
+
+.hoa-don-status .alert {
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.hoa-don-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.hoa-don-footer p {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.signature-name {
+    font-weight: bold;
+    margin-top: 60px;
+}
+
+.hoa-don-note {
+    margin-top: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #0066cc;
+    font-size: 12px;
+}
+
+.hoa-don-note ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.hoa-don-note li {
+    margin: 5px 0;
+    line-height: 1.6;
+}
+
+/* Print styles for hoa don */
+@media print {
+    .hoa-don {
+        padding: 20px;
+        box-shadow: none;
+    }
+    
+    .hoa-don-header {
+        page-break-after: avoid;
+    }
+    
+    .hoa-don-table {
+        page-break-inside: avoid;
+    }
+    
+    .hoa-don-footer {
+        page-break-before: avoid;
+    }
+}
